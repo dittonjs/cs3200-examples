@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, StatusBar, SafeAreaView, Button, View, TextInput } from 'react-native';
+import { Text, StatusBar, SafeAreaView, View, TextInput, StyleSheet } from 'react-native';
+import Button from './components/common/button';
 
 export default class App extends React.Component {
   state = {
@@ -14,6 +15,15 @@ export default class App extends React.Component {
       return state;
     });
   }
+
+  styles = StyleSheet.create({
+    lastButton: {
+      backgroundColor: 'black',
+    },
+    lastButtonText: {
+      color: 'white',
+    }
+  });
 
 
   handleInputChange = (currentTodoValue) => {
@@ -32,10 +42,20 @@ export default class App extends React.Component {
       <SafeAreaView>
         <StatusBar barStyle="dark-content" />
         {this.todoItems()}
-        <Button title="Add todo" onPress={this.addTodo} />
+        <Button title="Add todo" onPress={this.addTodo}/>
+        <Button title="Add todo" onPress={this.addTodo}/>
+        <Button title="Add todo" onPress={this.addTodo}/>
+        <Button title="Add todo" onPress={this.addTodo}/>
+        <Button
+          style={this.styles.lastButton}
+          titleStyle={this.styles.lastButtonText}
+          title="Add todo"
+          onPress={this.addTodo}
+        />
         <TextInput
           value={this.state.currentTodoValue}
           onChangeText={this.handleInputChange}
+
         />
       </SafeAreaView>
     )
