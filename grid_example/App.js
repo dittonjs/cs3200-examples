@@ -31,7 +31,17 @@ export default class App extends React.Component {
   }
 
   get rowComponents() {
+
     return _.map(this.state.grid, (row, i) => {
+      // IMPORTANT!!!!!
+      // This is just an example but not a final solution. The components
+      // returned from this function should really be their own React components.
+      // HERE IS A BIG HINT: you could write the following return statement as follows
+      //   return <Row rowData={row} key={row_i} />;
+      // That should point you in the right direction. You will need to move the logic
+      // for rendering the button into the Row component which you are going to write :)
+      // You are welcome to use this code as a starting point but will get docked points
+      // if not broken up into proper react components!
       return (
         <View style={this.styles.row} key={`row_${i}`}>
           {
