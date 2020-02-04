@@ -3,6 +3,14 @@ import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
 
 export default class App extends React.Component {
   styles = StyleSheet.create({
+    containerRow: {
+      backgroundColor: 'gray',
+      flex: 1,
+      borderColor: 'black',
+      borderWidth: 2,
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+    },
     containerColumn: {
       backgroundColor: 'gray',
       flex: 1,
@@ -10,19 +18,12 @@ export default class App extends React.Component {
       borderWidth: 2,
       alignItems: 'center'
     },
-    containerRow: {
-      backgroundColor: 'gray',
-      flex: 1,
-      borderColor: 'black',
-      borderWidth: 2,
-      flexDirection: 'row',
-      alignItems: 'flex-start'
-    },
     subContainer: {
       flex: 1,
       backgroundColor: 'green',
       borderColor: 'black',
       borderWidth: 1,
+      height: 50,
     }
   });
 
