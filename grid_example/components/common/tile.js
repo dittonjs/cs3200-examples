@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
-export default class Button extends React.Component {
+export default class Tile extends React.Component {
   styles = StyleSheet.create({
     button: {
       backgroundColor: 'gray',

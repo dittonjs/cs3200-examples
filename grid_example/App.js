@@ -1,7 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
-import Button from './components/common/button';
+import Tile from './components/common/tile';
+
+const ROWS = 8;
+const COLS = 5;
 
 export default class App extends React.Component {
   styles = StyleSheet.create({
@@ -18,20 +21,39 @@ export default class App extends React.Component {
   })
 
   state = {
-    grid: [
-      [1,2,3,4,5],
-      [1,2,3,4,5],
-      [1,2,3,4,5],
-      [1,2,3,4,5],
-      [1,2,3,4,5],
-      [1,2,3,4,5],
-      [1,2,3,4,5],
-      [1,2,3,4,5],
-    ]
+    grid: null,
+    loading: true,
+  }
+
+  componentDidMount() {
+    this.setState({
+      grid: this.buildGrid(),
+      loading: false,
+    });
+  }
+
+  buildGrid() {
+    let stack = _.fill(Array(COLS * ROWS), 0);
+    stack[0] = 1;
+    stack = _.shuffle(stack);
+    const grid = _.map(_.range(0, ROWS), () => {
+      return _.map(_.range(0, COLS), () => stack.pop());
+    });
+    return grid;
+  }
+
+  handleTilePress = (tileValue) => {
+    if (tileValue === 1) {
+      this.setState({
+        grid: this.buildGrid()
+      });
+    } else {
+      console.log('The user clicked the wrong tile');
+    }
+
   }
 
   get rowComponents() {
-
     return _.map(this.state.grid, (row, i) => {
       // IMPORTANT!!!!!
       // This is just an example but not a final solution. The components
@@ -45,13 +67,13 @@ export default class App extends React.Component {
       return (
         <View style={this.styles.row} key={`row_${i}`}>
           {
-            _.map(row, (columnValue, j) => {
+            _.map(row, (tileValue, j) => {
               return(
-                <Button
+                <Tile
                   key={`column_${j}`}
-                  title={columnValue}
+                  title={tileValue}
                   style={this.styles.column}
-                  onPress={() => console.log(`You pressed the button at row: ${i}, column: ${j}!`)}
+                  onPress={() => this.handleTilePress(tileValue)}
                 />
               );
             })
@@ -62,6 +84,11 @@ export default class App extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <SafeAreaView><Text>Loading...</Text></SafeAreaView>
+      );
+    }
     return (
       <SafeAreaView style={this.styles.container}>
         {this.rowComponents}
