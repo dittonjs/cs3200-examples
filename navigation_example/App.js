@@ -2,19 +2,20 @@ import React from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Home from './src/components/screens/home';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import HomeNavigator from './src/components/navigators/home';
 import Info from './src/components/screens/info';
-const Stack = createStackNavigator();
+// const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default class App extends React.Component {
   render() {
     return (
-
         <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Info" component={Info} />
-          </Stack.Navigator>
+          <Tab.Navigator>
+            <Tab.Screen name="Home" component={HomeNavigator} />
+            <Tab.Screen name="Info" component={Info} />
+          </Tab.Navigator>
         </NavigationContainer>
     );
   }

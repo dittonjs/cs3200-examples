@@ -6,7 +6,6 @@ export default class Info extends React.Component {
     return (
       <SafeAreaView>
         <Text>Hello from the info page!</Text>
-        <Button title="Go to home page" onPress={() => this.props.navigation.replace('Home')} />
       </SafeAreaView>
     );
   }
