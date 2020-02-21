@@ -5,7 +5,7 @@ export default class HomePage2 extends React.Component {
   render() {
     return (
       <SafeAreaView>
-        <Text>Hello, from the second home page!</Text>
+        <Text>Hello, I am a {this.props.route.params.fruit}</Text>
       </SafeAreaView>
     );
   }

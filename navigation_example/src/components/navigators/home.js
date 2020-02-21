@@ -1,15 +1,15 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import HomePage1 from '../screens/home/home_page_1';
-import HomePage2 from '../screens/home/home_page_2';
+import FruitsPage from '../screens/home/fruits_page';
+import FruitPage from '../screens/home/fruit_page';
 const Stack = createStackNavigator();
 
 export default class HomeNavigator extends React.Component {
   render() {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Home Page 1" component={HomePage1} />
-        <Stack.Screen name="Home Page 2" component={HomePage2} />
+        <Stack.Screen name="Fruits" component={FruitsPage} />
+        <Stack.Screen name="Fruit" component={FruitPage} />
       </Stack.Navigator>
     );
   }
