@@ -1,5 +1,6 @@
 import React from 'react';
-import { SafeAreaView, Text, FlatList, ScrollView, StyleSheet } from 'react-native';
+import _ from 'lodash';
+import { SafeAreaView, Text, FlatList, ScrollView, StyleSheet, TextInput } from 'react-native';
 import MoviesService from './src/services/movies.service';
 import MovieListItem from './src/components/movie_list_item';
 
@@ -9,21 +10,36 @@ export default class App extends React.Component {
     movies: [],
     loading: true,
     allLoaded: false,
+    searchTerm: '',
   }
 
   styles = StyleSheet.create({
     container: {
       flex: 1,
+    },
+    textInput: {
+      margin: 16,
+      borderBottomWidth: 1
     }
   });
 
-  async componentDidMount() {
+  constructor() {
+    super();
+    this.getMoviesFromSearchQuery = _.debounce(this.getMoviesFromSearchQuery, 1000)
+  }
+
+  getMoviesFromSearchQuery = async () => {
     try {
-      const movies = await MoviesService.search('Star Wars', 1);
-      this.setState({ movies, loading: false })
+      const movies = await MoviesService.search(this.state.searchTerm, 1);
+      this.setState({ movies, loading: false, currentPage: 1 });
     } catch (e) {
       console.log(e);
     }
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchTerm === this.state.searchTerm) return;
+    this.getMoviesFromSearchQuery();
   }
 
   loadMoreMovies = () => {
@@ -36,7 +52,7 @@ export default class App extends React.Component {
       { loading: true },
       async () => {
         try {
-          const newMovies = await MoviesService.search('Star Wars', this.state.currentPage + 1);
+          const newMovies = await MoviesService.search(this.state.searchTerm, this.state.currentPage + 1);
           this.setState((state) => {
             const newState = {...state};
             newState.movies = [...state.movies, ...newMovies];
@@ -57,6 +73,11 @@ export default class App extends React.Component {
   render() {
     return (
       <SafeAreaView style={this.styles.container}>
+        <TextInput
+          value={this.state.searchTerm}
+          style={this.styles.textInput}
+          onChangeText={newText => this.setState({ searchTerm: newText, movies: [] })}
+        />
         <FlatList
           data={this.state.movies}
           renderItem={(dataEntry) => {
