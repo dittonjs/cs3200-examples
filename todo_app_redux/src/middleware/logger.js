@@ -1,6 +1,17 @@
+import UUID from 'uuid-js';
 export default (store) => (next) => (action) => {
-  console.log("dispatching: ", action.type);
+
+  action.payload.id = UUID.create().toString();
   const result = next(action);
-  console.log("store done updating")
+  // console.log(store.getState());
   return result;
 }
+//
+
+// function() {
+//   returns function() {
+//     returns function() {
+//
+//     }
+//   }
+// }

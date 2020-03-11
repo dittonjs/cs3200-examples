@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createTodo } from '../../actions/todos';
 import { Container, Input, Form, Item, Label, Textarea, Button, Text } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 
 export class CreateTodoScreen extends React.Component {
   state = {
@@ -10,6 +10,7 @@ export class CreateTodoScreen extends React.Component {
     description: '',
     location: '',
     startTime: '',
+    titleMissing: false
   }
 
   styles = StyleSheet.create({
@@ -22,16 +23,28 @@ export class CreateTodoScreen extends React.Component {
   update = (key, value) => this.setState({ [key]: value })
 
   save = () => {
+    if (this.state.title === '') {
+      Alert.alert(
+        'Missing Info',
+        'You have to provide a title dummy!!',
+      );
+
+      this.setState({ titleMissing: true })
+
+      return;
+    }
     this.props.createTodo(
       this.state.title,
       this.state.description,
       this.state.location,
       this.state.startTime,
     );
+
     this.props.navigation.goBack();
   }
 
   render() {
+
     return (
       <Container>
         <Form>
