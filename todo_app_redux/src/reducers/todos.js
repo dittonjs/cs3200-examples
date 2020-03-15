@@ -4,7 +4,7 @@ const initialState = []
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case constants.CREATE_TDO:
+    case constants.get('CREATE_TODO'):
       const newTodo = {
         ...action.payload,
       }
