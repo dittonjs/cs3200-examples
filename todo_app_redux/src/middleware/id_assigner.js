@@ -1,13 +1,13 @@
 import UUID from 'uuid-js';
 export default (store) => (next) => (action) => {
-
-  action.payload.id = UUID.create().toString();
+  if (action.payload) {
+    action.payload.id = UUID.create().toString();
+  }
   const result = next(action);
-  // console.log(store.getState());
   return result;
 }
-//
 
+// MIDDLEWARE IS A FUNCTION THAT RETURNS A FUNCTION THAT RETURNS A FUNCTION
 // function() {
 //   returns function() {
 //     returns function() {

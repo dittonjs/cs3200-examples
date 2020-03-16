@@ -1,12 +1,14 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import todos from '../reducers/todos';
-import logger from '../middleware/logger';
+import idAssigner from '../middleware/id_assigner';
+import storage from '../middleware/storage';
 
 export default createStore(
   combineReducers({
     todos
   }),
   applyMiddleware(
-    logger
+    idAssigner,
+    storage,
   ),
 );

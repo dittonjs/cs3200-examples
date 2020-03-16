@@ -9,6 +9,8 @@ export default function(state = initialState, action) {
         ...action.payload,
       }
       return [...state, newTodo];
+    case constants.get('GET_TODOS_DONE'):
+      return action.payload;
     default:
       return state;
   }
