@@ -15,7 +15,7 @@ export class TodoListScreen extends React.Component {
   })
 
   state = {
-    loadedName: 'Fake Name',
+    loadedName: 'Joseph',
   }
   // PRIMITIVE EXAMPLE OF STORAGE
   // async componentDidMount() {
