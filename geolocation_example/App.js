@@ -60,7 +60,6 @@ export default class App extends React.Component {
   render() {
     if (!this.state.currentPosition) return null;
     return (
-      <SafeAreaView style={this.styles.flex}>
         <MapView
           style={this.styles.flex}
           initialRegion={this.state.currentPosition}
@@ -109,15 +108,6 @@ export default class App extends React.Component {
             ))
           }
         </MapView>
-        <View style={this.styles.flex}>
-          <Text>My birthday party</Text>
-          <Text>My birthday party</Text>
-          <Text>My birthday party</Text>
-          <Text>My birthday party</Text>
-          <Text>My birthday party</Text>
-          <Button title="Click me!" onPress={console.log} />
-        </View>
-      </SafeAreaView>
     );
   }
 }
