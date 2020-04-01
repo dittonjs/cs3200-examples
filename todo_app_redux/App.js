@@ -6,6 +6,8 @@ import { Button, Text, Container } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import TodoListScreen from './src/components/screens/todo_list_screen';
 import CreateTodoScreen from './src/components/screens/create_todo_screen';
+import TodoScreen from './src/components/screens/todo_screen';
+
 import store from './src/store/store';
 
 const Stack = createStackNavigator();
@@ -30,6 +32,7 @@ export default class App extends React.Component {
               })}
             />
             <Stack.Screen name="Create Todo" component={CreateTodoScreen} />
+            <Stack.Screen name="Todo Screen" component={TodoScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

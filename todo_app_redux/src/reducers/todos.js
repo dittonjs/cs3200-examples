@@ -11,6 +11,8 @@ export default function(state = initialState, action) {
       return [...state, newTodo];
     case constants.get('GET_TODOS_DONE'):
       return action.payload;
+    case constants.get('DELETE_TODO'):
+      return state.filter(todo => todo.id !== action.id);
     default:
       return state;
   }

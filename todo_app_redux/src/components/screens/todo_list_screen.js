@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Container, Text, H1 } from 'native-base';
 import { FlatList, StyleSheet } from 'react-native';
 import TodoListItem from '../todos/todo_list_item';
-import { getTodos } from '../../actions/todos';
+import { getTodos, deleteTodo } from '../../actions/todos';
 
 export class TodoListScreen extends React.Component {
   styles = StyleSheet.create({
@@ -49,7 +49,11 @@ export class TodoListScreen extends React.Component {
         <FlatList
           data={this.props.todos}
           renderItem={({item}) => (
-            <TodoListItem todo={item} />
+            <TodoListItem
+              todo={item}
+              navigation={this.props.navigation}
+              deleteTodo={this.props.deleteTodo}
+            />
           )}
           keyExtractor={item => `todo_${item.id}`}
         />
@@ -66,4 +70,4 @@ select = (storeState) => {
 
 // select = ({ todos }) => ({ todos });
 
-export default connect(select, { getTodos })(TodoListScreen);
+export default connect(select, { getTodos, deleteTodo })(TodoListScreen);
