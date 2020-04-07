@@ -1,10 +1,14 @@
 import React from 'react';
-import { Text, StyleSheet, Image, Button, SafeAreaView, View } from 'react-native';
+import { Text, StyleSheet, Image, Button, SafeAreaView, View, Platform } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import MapView, { Marker, Circle, Polyline, Callout } from 'react-native-maps';
+import { check, request, openSettings, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import withPermission from './src/lib/with_permission';
 
+const androidPermission = PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
+const iosPermission = PERMISSIONS.IOS.LOCATION_WHEN_IN_USE;
 
-export default class App extends React.Component {
+export class App extends React.Component {
   styles = StyleSheet.create({
     flex: {
       flex: 1,
@@ -17,7 +21,7 @@ export default class App extends React.Component {
     coordinates: [],
   }
 
-  componentDidMount() {
+  watchPosition() {
     Geolocation.watchPosition(
       ({ coords }) => {
         this.setState((state) => ({
@@ -38,6 +42,10 @@ export default class App extends React.Component {
         distanceFilter: 0,
       }
     );
+  }
+
+  componentDidMount() {
+    this.watchPosition();
   }
 
   onMapPress = (e) => {
@@ -111,3 +119,6 @@ export default class App extends React.Component {
     );
   }
 }
+console.log("Hello", App)
+
+export default withPermission(Platform.OS === 'ios' ? iosPermission : androidPermission)(App);

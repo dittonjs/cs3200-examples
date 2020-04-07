@@ -1,5 +1,5 @@
 {
-  "name": "geolocation_example",
+  "name": "custom_icon",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,11 +10,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@react-native-community/geolocation": "^2.0.2",
     "react": "16.9.0",
-    "react-native": "0.61.5",
-    "react-native-maps": "^0.27.1",
-    "react-native-permissions": "^2.0.10"
+    "react-native": "0.61.5"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
